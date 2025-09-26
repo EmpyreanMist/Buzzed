@@ -1,4 +1,24 @@
 [
-  { "text": "Vilken är din största hemlighet ingen här vet om?" },
-  { "text": "Vem i rummet skulle du helst dejta?" }
+  { "text": "What’s the most embarrassing thing you’ve done while drunk?" },
+  { "text": "Have you ever had a crush on someone here?" },
+  { "text": "What’s the worst lie you’ve ever told your parents?" },
+  { "text": "What’s the most awkward sexual experience you’ve ever had?" },
+  { "text": "Who in this room would you never want to hook up with, and why?" },
+  { "text": "Have you ever cheated on a partner or come close?" },
+  { "text": "What’s the biggest secret you’re hiding from your friends?" },
+  { "text": "What’s the worst thing you’ve ever done at work or school?" },
+  { "text": "Who was your last inappropriate fantasy about?" },
+  { "text": "What’s the meanest thing you’ve said behind someone’s back?" },
+  { "text": "Have you ever hooked up with someone you shouldn’t have?" },
+  {
+    "text": "What’s the one thing you never want your parents to know about you?"
+  },
+  { "text": "What’s the wildest thing you’ve done that you regret?" },
+  { "text": "What’s the pettiest reason you’ve ever rejected someone?" },
+  { "text": "What’s the weirdest thing that turns you on?" },
+  { "text": "Who here do you think is the worst kisser?" },
+  { "text": "What’s the biggest secret you’ve kept from your ex?" },
+  { "text": "Have you ever sent a risky text to the wrong person?" },
+  { "text": "What’s your guilty pleasure that you’d be embarrassed to admit?" },
+  { "text": "What’s the most scandalous thing on your phone right now?" }
 ]
