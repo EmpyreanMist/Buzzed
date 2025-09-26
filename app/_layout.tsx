@@ -21,15 +21,19 @@ export default function RootLayout() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <Stack
-            initialRouteName="index"
-            screenOptions={{ headerShown: false }}
-          >
+          <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
+
             <Stack.Screen name="playerSetup" />
+
             <Stack.Screen name="menu" />
+
             <Stack.Screen name="truthOrConsequence" />
+            <Stack.Screen name="neverHaveIEver" />
+            <Stack.Screen name="wouldYouRather" />
+            <Stack.Screen name="mostLikely" />
           </Stack>
+
           <StatusBar style="auto" />
         </ThemeProvider>
       </GluestackUIProvider>

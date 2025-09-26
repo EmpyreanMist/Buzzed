@@ -1,0 +1,36 @@
+[
+  {
+    "optionA": "Never drink alcohol again",
+    "optionB": "Never eat pizza again"
+  },
+  {
+    "optionA": "Be rich but lonely",
+    "optionB": "Be poor but surrounded by friends"
+  },
+  {
+    "optionA": "Always say what you think",
+    "optionB": "Never be able to speak again"
+  },
+  {
+    "optionA": "Only listen to one song forever",
+    "optionB": "Never listen to music again"
+  },
+  {
+    "optionA": "Be 10 minutes late everywhere",
+    "optionB": "Be 20 minutes early everywhere"
+  },
+  { "optionA": "Lose your phone", "optionB": "Lose your wallet" },
+  { "optionA": "Live without coffee", "optionB": "Live without beer" },
+  {
+    "optionA": "Always have hiccups",
+    "optionB": "Always feel like you need to sneeze"
+  },
+  {
+    "optionA": "Spend a year in jail",
+    "optionB": "Spend a year completely alone"
+  },
+  {
+    "optionA": "Have unlimited free food",
+    "optionB": "Have unlimited free drinks"
+  }
+]

@@ -1,3 +1,4 @@
+// app/index.tsx
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -7,7 +8,7 @@ export default function AgeGate() {
   const [error, setError] = useState(false);
 
   const handleYes = () => {
-    router.replace("/menu"); // 👈 går direkt till menyn
+    router.replace("/menu"); // 👈 alltid till menyn
   };
 
   const handleNo = () => {
