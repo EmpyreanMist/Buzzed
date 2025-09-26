@@ -7,7 +7,7 @@ export default function AgeGate() {
   const [error, setError] = useState(false);
 
   const handleYes = () => {
-    router.replace("/playerSetup"); // ⬅️ Viktigt: gå till playerSetup
+    router.replace("/menu"); // 👈 går direkt till menyn
   };
 
   const handleNo = () => {
