@@ -1,0 +1,20 @@
+{
+  "questions": [
+    {
+      "id": "q001",
+      "text": "How many people have you hooked up with?",
+      "type": "truth",
+      "severity": "spicy",
+      "tags": ["personal", "sex"],
+      "nsfw": true
+    },
+    {
+      "id": "q002",
+      "text": "Have you ever been caught doing something you shouldn't?",
+      "type": "truth",
+      "severity": "spicy",
+      "tags": ["personal"],
+      "nsfw": true
+    }
+  ]
+}
