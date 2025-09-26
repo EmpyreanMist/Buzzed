@@ -1,26 +1,42 @@
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Button, Text, View } from "react-native";
-import neverHaveData from "../assets/data/neverHaveIEver.json";
+import { Button, Text, TouchableOpacity, View } from "react-native";
+import questionsData from "../assets/data/neverHaveIEver.json";
 
 type Question = {
   text: string;
 };
 
-// Casta JSON till rätt typ
-const neverHave = neverHaveData as Question[];
+const questions: Question[] = questionsData;
 
 export default function NeverHaveIEver() {
+  const router = useRouter();
   const [prompt, setPrompt] = useState("");
 
   const getQuestion = () => {
-    const rand = Math.floor(Math.random() * neverHave.length);
-    setPrompt("🙅‍♂️ Never have I ever " + neverHave[rand].text);
+    const rand = Math.floor(Math.random() * questions.length);
+    setPrompt(questions[rand].text);
   };
 
   return (
     <View className="flex-1 items-center justify-center bg-black px-6">
-      <Text className="text-white text-2xl mb-6 text-center">{prompt}</Text>
+      {/* Home button */}
+      <TouchableOpacity
+        onPress={() => router.replace("/menu")}
+        className="absolute top-10 right-6 bg-gray-700 px-4 py-2 rounded-lg"
+      >
+        <Text className="text-white font-bold">🏠 Home</Text>
+      </TouchableOpacity>
 
+      {/* Title */}
+      <Text className="text-white text-4xl font-bold mb-12 text-center">
+        Never Have I Ever...
+      </Text>
+
+      {/* Question */}
+      <Text className="text-white text-2xl mb-10 text-center">{prompt}</Text>
+
+      {/* Button */}
       <Button title="Next Question" onPress={getQuestion} />
     </View>
   );

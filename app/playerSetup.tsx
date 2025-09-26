@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
   FlatList,
@@ -12,66 +12,77 @@ import { usePlayers } from "./playerContext";
 
 export default function PlayerSetup() {
   const router = useRouter();
-  const { players, setPlayers } = usePlayers();
+  const { next } = useLocalSearchParams<{ next?: string }>();
+  const { players, addPlayer, removePlayer } = usePlayers();
   const [name, setName] = useState("");
 
-  const addPlayer = () => {
+  const handleAddPlayer = () => {
     if (name.trim().length > 0) {
-      setPlayers([...players, name.trim()]);
+      addPlayer(name.trim());
       setName("");
     }
   };
 
+  const handleRemovePlayer = (index: number) => {
+    removePlayer(index);
+  };
+
   const startGame = () => {
-    router.replace("/menu");
+    if (next === "truthOrConsequence") {
+      router.replace("/truthOrConsequence");
+    } else {
+      router.replace("/menu");
+    }
   };
 
   return (
     <View className="flex-1 bg-black px-6 pt-12">
-      {/* Titel */}
-      <Text className="text-white text-4xl font-bold mb-6 text-center">
-        👥 Add Players
+      <Text className="text-white text-4xl font-bold text-center mb-6">
+        Add Players
       </Text>
 
-      {/* Input + knapp */}
+      {/* Input + Add knapp */}
       <View className="flex-row mb-6">
         <TextInput
           value={name}
           onChangeText={setName}
           placeholder="Enter name"
           placeholderTextColor="#aaa"
-          className="flex-1 bg-white rounded-l px-4 py-3 text-black"
+          className="flex-1 bg-white rounded px-4 py-2 mr-2 text-black"
         />
         <TouchableOpacity
-          onPress={addPlayer}
-          className="bg-green-500 px-5 rounded-r items-center justify-center"
+          onPress={handleAddPlayer}
+          className="bg-green-500 px-4 py-2 rounded"
         >
           <Text className="text-white font-bold">Add</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Lista med spelare */}
       <FlatList
         data={players}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View className="flex-row items-center bg-gray-900 px-4 py-3 mb-3 rounded-lg">
-            <Ionicons name="person-circle-outline" size={24} color="#a855f7" />
-            <Text className="text-white text-lg ml-3">{item}</Text>
+        renderItem={({ item, index }) => (
+          <View className="flex-row items-center justify-between mb-2 bg-gray-800 rounded px-3 py-2">
+            <View className="flex-row items-center">
+              <Ionicons name="person" size={20} color="#38bdf8" />
+              <Text className="text-white text-lg ml-2">{item}</Text>
+            </View>
+
+            <TouchableOpacity onPress={() => handleRemovePlayer(index)}>
+              <Ionicons name="close-circle" size={22} color="#f87171" />
+            </TouchableOpacity>
           </View>
         )}
-        style={{ flex: 1, width: "100%" }}
+        style={{ width: "100%", marginBottom: 20 }}
       />
 
-      {/* Start Game */}
+      {/* Start Game knapp */}
       {players.length > 0 && (
         <TouchableOpacity
           onPress={startGame}
-          className="bg-blue-600 py-4 rounded-lg mt-6 mb-20 w-full"
+          className="bg-blue-600 px-6 py-3 rounded self-center mb-40"
         >
-          <Text className="text-white font-bold text-lg text-center">
-            🚀 Start Game
-          </Text>
+          <Text className="text-white font-bold text-lg">Start Game</Text>
         </TouchableOpacity>
       )}
     </View>
