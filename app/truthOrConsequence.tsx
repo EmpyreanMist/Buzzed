@@ -1,9 +1,10 @@
+import HomeButton from "@/components/HomeButton";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import consequencesData from "../assets/data/consequence.json";
 import truthsData from "../assets/data/truths.json";
-import { usePlayers } from "./playerContext";
+import { usePlayers } from "../components/contexts/PlayerContext";
 
 type Question = {
   text: string;
@@ -18,7 +19,6 @@ export default function TruthOrConsequence() {
   const [currentPlayer, setCurrentPlayer] = useState("");
   const router = useRouter();
 
-  // Välj slumpmässig spelare
   const pickPlayer = () => {
     if (players.length === 0) return "Someone";
     const rand = Math.floor(Math.random() * players.length);
@@ -42,28 +42,22 @@ export default function TruthOrConsequence() {
     const rand = Math.floor(Math.random() * consequences.length);
     const chosenPlayer = pickPlayer();
     setCurrentPlayer(chosenPlayer);
-    setPrompt("🔥 Consequence: " + consequences[rand].text);
+    setPrompt("Consequence: " + consequences[rand].text);
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-black">
-      {/* Top bar lite längre ner */}
-      <View className="flex-row justify-between items-center px-4 mt-20">
-        {/* Home knapp */}
-        <TouchableOpacity
-          onPress={() => router.replace("/menu")}
-          className="bg-gray-700 px-3 py-1 rounded"
-        >
-          <Text className="text-white font-bold">🏠 Home</Text>
-        </TouchableOpacity>
+    <>
+      <View className="relative w-full h-16">
+        <HomeButton />
 
-        {/* Player badge */}
-        <View className="bg-blue-600 px-3 py-1 rounded-full">
+        <TouchableOpacity
+          disabled
+          className="absolute top-6 right-6 bg-blue-600 px-3 py-1 rounded-full"
+        >
           <Text className="text-white font-bold">{players.length} Players</Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
-      {/* Centralt innehåll */}
       <View className="flex-1 items-center justify-center px-6">
         {currentPlayer !== "" && (
           <Text className="text-white text-2xl mb-4 text-center">
@@ -89,6 +83,6 @@ export default function TruthOrConsequence() {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </>
   );
 }

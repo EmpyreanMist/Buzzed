@@ -7,13 +7,11 @@ export default function Menu() {
 
   return (
     <View className="flex-1 items-center justify-center bg-black px-6">
-      {/* Titel */}
       <Text className="text-4xl font-bold text-white mb-2">🍻 Buzzed</Text>
       <Text className="text-lg text-white/70 mb-10">Choose your game mode</Text>
 
-      {/* Spelval */}
       <TouchableOpacity
-        onPress={() => router.push("/truthOrConsequence")}
+        onPress={() => router.push("/playerSetup?next=truthOrConsequence")}
         className="bg-red-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
       >
         <Text className="text-white text-lg font-bold">

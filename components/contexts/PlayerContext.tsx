@@ -4,7 +4,7 @@ type PlayerContextType = {
   players: string[];
   setPlayers: React.Dispatch<React.SetStateAction<string[]>>;
   addPlayer: (name: string) => void;
-  removePlayer: (index: number) => void; // 👈 lägg till här
+  removePlayer: (index: number) => void;
 };
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);

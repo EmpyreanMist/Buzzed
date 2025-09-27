@@ -7,10 +7,11 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+import ScreenContainer from "@/components/ScreenContainer";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { PlayerProvider } from "./playerContext";
+import { PlayerProvider } from "../components/contexts/PlayerContext";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -21,20 +22,22 @@ export default function RootLayout() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
+          <ScreenContainer>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="index" />
 
-            <Stack.Screen name="playerSetup" />
+              <Stack.Screen name="playerSetup" />
 
-            <Stack.Screen name="menu" />
+              <Stack.Screen name="menu" />
 
-            <Stack.Screen name="truthOrConsequence" />
-            <Stack.Screen name="neverHaveIEver" />
-            <Stack.Screen name="wouldYouRather" />
-            <Stack.Screen name="mostLikely" />
-          </Stack>
+              <Stack.Screen name="truthOrConsequence" />
+              <Stack.Screen name="neverHaveIEver" />
+              <Stack.Screen name="wouldYouRather" />
+              <Stack.Screen name="mostLikelyTo" />
+            </Stack>
 
-          <StatusBar style="auto" />
+            <StatusBar style="auto" />
+          </ScreenContainer>
         </ThemeProvider>
       </GluestackUIProvider>
     </PlayerProvider>

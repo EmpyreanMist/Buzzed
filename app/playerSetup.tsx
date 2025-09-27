@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { usePlayers } from "./playerContext";
+import { usePlayers } from "../components/contexts/PlayerContext";
 
 export default function PlayerSetup() {
   const router = useRouter();
@@ -41,7 +41,6 @@ export default function PlayerSetup() {
         Add Players
       </Text>
 
-      {/* Input + Add knapp */}
       <View className="flex-row mb-6">
         <TextInput
           value={name}
@@ -76,7 +75,6 @@ export default function PlayerSetup() {
         style={{ width: "100%", marginBottom: 20 }}
       />
 
-      {/* Start Game knapp */}
       {players.length > 0 && (
         <TouchableOpacity
           onPress={startGame}

@@ -1,5 +1,5 @@
 // app/wouldYouRather.tsx
-import { Ionicons } from "@expo/vector-icons";
+import HomeButton from "@/components/HomeButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -21,18 +21,8 @@ export default function WouldYouRather() {
 
   return (
     <View className="flex-1 bg-black px-6 pt-16">
-      {/* Home knapp */}
-      <View className="flex-row justify-start mb-10">
-        <TouchableOpacity
-          onPress={() => router.replace("/menu")}
-          className="bg-red-500 px-4 py-2 rounded-lg flex-row items-center"
-        >
-          <Ionicons name="home" size={20} color="white" />
-          <Text className="text-white font-bold ml-2">Home</Text>
-        </TouchableOpacity>
-      </View>
+      <HomeButton />
 
-      {/* Main content */}
       <View className="flex-1 items-center justify-center">
         {prompt ? (
           <>
@@ -40,20 +30,19 @@ export default function WouldYouRather() {
               Would you rather...
             </Text>
             <Text className="text-white text-xl text-center mb-4">
-              👉 {prompt.optionA}
+              {prompt.optionA}
             </Text>
             <Text className="text-white text-xl text-center">
-              👉 {prompt.optionB}
+              {prompt.optionB}
             </Text>
           </>
         ) : (
           <Text className="text-white text-xl text-center px-4 opacity-70">
-            Tap below to get your first question 👇
+            Tap below to get your first question
           </Text>
         )}
       </View>
 
-      {/* Next Question button */}
       <TouchableOpacity
         onPress={getRandomQuestion}
         className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
