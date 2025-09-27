@@ -30,6 +30,8 @@ export default function PlayerSetup() {
   const startGame = () => {
     if (next === "truthOrConsequence") {
       router.replace("/truthOrConsequence");
+    } else if (next === "eightSeconds") {
+      router.replace("/eightSeconds");
     } else {
       router.replace("/menu");
     }

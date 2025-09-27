@@ -39,9 +39,17 @@ export default function Menu() {
 
       <TouchableOpacity
         onPress={() => router.push("/mostLikelyTo")}
-        className="bg-sky-500 px-8 py-4 rounded-lg w-full items-center"
+        className="bg-sky-500 px-8 py-4 rounded-lg mb-4 w-full items-center"
       >
         <Text className="text-white text-lg font-bold">Most Likely To 👀</Text>
+      </TouchableOpacity>
+
+      {/* Eight Seconds */}
+      <TouchableOpacity
+        onPress={() => router.push("/playerSetup?next=eightSeconds")}
+        className="bg-green-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
+      >
+        <Text className="text-white text-lg font-bold">8 Seconds ⏱️</Text>
       </TouchableOpacity>
     </View>
   );

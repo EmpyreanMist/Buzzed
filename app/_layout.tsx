@@ -24,16 +24,18 @@ export default function RootLayout() {
         >
           <ScreenContainer>
             <Stack screenOptions={{ headerShown: false }}>
+              {/* Age Gate */}
               <Stack.Screen name="index" />
-
+              {/* Player setup */}
               <Stack.Screen name="playerSetup" />
-
+              {/* Menu */}
               <Stack.Screen name="menu" />
-
+              {/* Games */}
               <Stack.Screen name="truthOrConsequence" />
               <Stack.Screen name="neverHaveIEver" />
               <Stack.Screen name="wouldYouRather" />
               <Stack.Screen name="mostLikelyTo" />
+              <Stack.Screen name="eightSeconds" />
             </Stack>
 
             <StatusBar style="auto" />
