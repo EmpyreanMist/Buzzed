@@ -48,7 +48,10 @@ export default function PlayerSetup() {
           placeholder="Enter name"
           placeholderTextColor="#aaa"
           className="flex-1 bg-white rounded px-4 py-2 mr-2 text-black"
+          onSubmitEditing={handleAddPlayer}
+          returnKeyType="done"
         />
+
         <TouchableOpacity
           onPress={handleAddPlayer}
           className="bg-green-500 px-4 py-2 rounded"
