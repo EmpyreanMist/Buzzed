@@ -1,26 +1,55 @@
 [
-  { "text": "Do 20 pushups right now or finish your drink." },
-  { "text": "Send a random emoji to the last person you texted." },
+  { "text": "Post the last photo you took on your social media." },
   {
-    "text": "Let the person on your right post something on your Instagram story."
+    "text": "Let the group add something random to your online shopping cart."
   },
-  { "text": "Take a shot without using your hands." },
-  { "text": "Read out loud your last 5 Google searches." },
-  { "text": "Speak in an accent until your next turn." },
-  { "text": "Swap shirts with the person next to you." },
-  { "text": "Let someone look through your camera roll for 30 seconds." },
-  { "text": "Call your crush right now or take two shots." },
-  { "text": "Dance on the table for 30 seconds." },
-  { "text": "Let the group look at your Tinder/DMs for 1 minute." },
-  { "text": "Eat or drink a weird mix of 3 things chosen by the group." },
+  { "text": "Talk in only questions until your next turn." },
+  { "text": "Try to juggle 3 random objects from the room." },
+  { "text": "Wear your shoes on the wrong feet until your next turn." },
+  { "text": "Eat a spoonful of a condiment chosen by the group." },
+  { "text": "Do 10 squats while shouting your own name." },
   {
-    "text": "Do your best impression of someone here until the group guesses who it is."
+    "text": "Let someone write a text to a contact of their choice from your phone."
   },
-  { "text": "Wear socks on your hands until your next turn." },
-  { "text": "Let someone draw on your face with a marker." },
-  { "text": "Try to rap about everyone in the room." },
-  { "text": "Pretend to flirt with the person on your left for 1 minute." },
-  { "text": "Let the group go through your Spotify playlists for 1 minute." },
-  { "text": "Take a sip for every ex you’ve had." },
-  { "text": "Do your best sexy dance for 20 seconds." }
+  { "text": "Do your best runway walk across the room." },
+  { "text": "Sing the chorus of a song chosen by the group." },
+  { "text": "Act like a cat until your next turn." },
+  { "text": "Take a silly selfie and send it to your mom/dad." },
+  { "text": "Do your worst dance move until the group says stop." },
+  { "text": "Speak only in a whisper until your next turn." },
+  { "text": "Balance a random object on your head for 1 minute." },
+  { "text": "Let the person across from you redo your hairstyle." },
+  {
+    "text": "Swap seats with someone every time someone says 'drink' until your next turn."
+  },
+  { "text": "Pretend you’re a waiter and take everyone’s fake food orders." },
+  { "text": "Show the group your most embarrassing saved photo." },
+  { "text": "Wear your jacket backwards for the rest of the game." },
+  { "text": "Say 'I love you' to the first contact in your phone." },
+  { "text": "Do 15 jumping jacks while shouting 'I’m the best!'" },
+  {
+    "text": "Let someone choose a new nickname for you that everyone must use."
+  },
+  {
+    "text": "Do an impression of your favorite celebrity until your next turn."
+  },
+  { "text": "Show the group the last meme you saved." },
+  { "text": "Try to lick your elbow (for real)." },
+  { "text": "Let the group decide your next Instagram caption." },
+  { "text": "Talk in slow motion until your next turn." },
+  { "text": "Do a silly TikTok dance, even without music." },
+  { "text": "Sing everything you want to say until your next turn." },
+  { "text": "Let someone else send one text to anyone in your phone." },
+  { "text": "Do push-ups while someone sits on your back (if safe)." },
+  { "text": "Show the group your hidden photo album (if you have one)." },
+  { "text": "Wear sunglasses indoors until your next turn." },
+  {
+    "text": "Pretend you are an animal chosen by the group until your next turn."
+  },
+  { "text": "Let the group pick a new ringtone for your phone." },
+  { "text": "Try to balance on one leg for 1 minute." },
+  { "text": "Let someone redraw your eyebrows with a pen." },
+  {
+    "text": "Take a selfie making your ugliest face possible and send it to your best friend."
+  }
 ]

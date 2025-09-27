@@ -32,5 +32,92 @@
   {
     "optionA": "Have unlimited free food",
     "optionB": "Have unlimited free drinks"
+  },
+
+  { "optionA": "Be able to fly", "optionB": "Be invisible" },
+  {
+    "optionA": "Never use social media again",
+    "optionB": "Never watch TV/movies again"
+  },
+  { "optionA": "Always have bad breath", "optionB": "Always have body odor" },
+  { "optionA": "Live in the past", "optionB": "Live in the future" },
+  {
+    "optionA": "Be the funniest person in the room",
+    "optionB": "Be the smartest person in the room"
+  },
+  {
+    "optionA": "Never shower again",
+    "optionB": "Never brush your teeth again"
+  },
+  {
+    "optionA": "Have no internet",
+    "optionB": "Have no air conditioning/heating"
+  },
+  { "optionA": "Only whisper forever", "optionB": "Only shout forever" },
+  {
+    "optionA": "Be stuck in traffic forever",
+    "optionB": "Have really slow internet forever"
+  },
+  {
+    "optionA": "Know the date of your death",
+    "optionB": "Know how you will die"
+  },
+
+  { "optionA": "Be able to read minds", "optionB": "Be able to teleport" },
+  { "optionA": "Have super strength", "optionB": "Have super intelligence" },
+  { "optionA": "Be famous but hated", "optionB": "Be unknown but loved" },
+  {
+    "optionA": "Never be able to lie again",
+    "optionB": "Always believe everything you’re told"
+  },
+  { "optionA": "Eat only sweet food", "optionB": "Eat only salty food" },
+  {
+    "optionA": "Fight one horse-sized duck",
+    "optionB": "Fight 100 duck-sized horses"
+  },
+  {
+    "optionA": "Be a kid your whole life",
+    "optionB": "Be an adult your whole life"
+  },
+  {
+    "optionA": "Have a rewind button in life",
+    "optionB": "Have a pause button in life"
+  },
+  { "optionA": "Be too hot always", "optionB": "Be too cold always" },
+  {
+    "optionA": "Never sleep again",
+    "optionB": "Never eat your favorite food again"
+  },
+
+  {
+    "optionA": "Win the lottery but lose all your friends",
+    "optionB": "Stay broke but have amazing friends"
+  },
+  {
+    "optionA": "Always get stuck with red lights",
+    "optionB": "Always get slow Wi-Fi"
+  },
+  { "optionA": "Live without music", "optionB": "Live without movies" },
+  {
+    "optionA": "Only be able to use a fork",
+    "optionB": "Only be able to use a spoon"
+  },
+  {
+    "optionA": "Always wear wet socks",
+    "optionB": "Always wear damp underwear"
+  },
+  {
+    "optionA": "Be able to talk to animals",
+    "optionB": "Be able to speak every language"
+  },
+  {
+    "optionA": "Have unlimited free travel",
+    "optionB": "Have unlimited free clothes"
+  },
+  { "optionA": "Always be hungry", "optionB": "Always be tired" },
+  { "optionA": "Lose all your money", "optionB": "Lose all your photos" },
+  {
+    "optionA": "Be stuck on an island alone",
+    "optionB": "Be stuck on an island with your worst enemy"
   }
 ]
