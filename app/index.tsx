@@ -1,14 +1,14 @@
-// app/index.tsx
+import HapticButton from "@/components/HapticButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 
 export default function AgeGate() {
   const router = useRouter();
   const [error, setError] = useState(false);
 
   const handleYes = () => {
-    router.replace("/menu"); // 👈 alltid till menyn
+    router.replace("/menu");
   };
 
   const handleNo = () => {
@@ -20,19 +20,19 @@ export default function AgeGate() {
       <Text className="text-3xl font-bold text-white mb-6">Are you 18+?</Text>
 
       <View className="flex-row space-x-6">
-        <TouchableOpacity
-          onPress={handleYes}
+        <HapticButton
+          title="Yes"
+          variant="medium"
           className="bg-green-500 px-6 py-3 rounded-lg"
-        >
-          <Text className="text-white font-bold text-lg">Yes</Text>
-        </TouchableOpacity>
+          onPress={handleYes}
+        />
 
-        <TouchableOpacity
-          onPress={handleNo}
+        <HapticButton
+          title="No"
+          variant="error"
           className="bg-red-500 px-6 py-3 rounded-lg"
-        >
-          <Text className="text-white font-bold text-lg">No</Text>
-        </TouchableOpacity>
+          onPress={handleNo}
+        />
       </View>
 
       {error && (

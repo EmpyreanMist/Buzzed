@@ -1,13 +1,8 @@
+import HapticButton from "@/components/HapticButton";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import {
-  FlatList,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, Text, TextInput, View } from "react-native";
 import { usePlayers } from "../components/contexts/PlayerContext";
 
 export default function PlayerSetup() {
@@ -54,12 +49,12 @@ export default function PlayerSetup() {
           returnKeyType="done"
         />
 
-        <TouchableOpacity
-          onPress={handleAddPlayer}
+        <HapticButton
+          title="Add"
+          variant="medium"
           className="bg-green-500 px-4 py-2 rounded"
-        >
-          <Text className="text-white font-bold">Add</Text>
-        </TouchableOpacity>
+          onPress={handleAddPlayer}
+        />
       </View>
 
       <FlatList
@@ -72,21 +67,24 @@ export default function PlayerSetup() {
               <Text className="text-white text-lg ml-2">{item}</Text>
             </View>
 
-            <TouchableOpacity onPress={() => handleRemovePlayer(index)}>
-              <Ionicons name="close-circle" size={22} color="#f87171" />
-            </TouchableOpacity>
+            <HapticButton
+              title="✖"
+              variant="error"
+              className="px-2 py-1"
+              onPress={() => handleRemovePlayer(index)}
+            />
           </View>
         )}
         style={{ width: "100%", marginBottom: 20 }}
       />
 
       {players.length > 0 && (
-        <TouchableOpacity
-          onPress={startGame}
+        <HapticButton
+          title="Start Game"
+          variant="medium"
           className="bg-blue-600 px-6 py-3 rounded self-center mb-40"
-        >
-          <Text className="text-white font-bold text-lg">Start Game</Text>
-        </TouchableOpacity>
+          onPress={startGame}
+        />
       )}
     </View>
   );

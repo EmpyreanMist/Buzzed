@@ -1,7 +1,8 @@
+import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import questionsData from "../assets/data/neverHaveIEver.json";
 
 type Question = {
@@ -29,7 +30,12 @@ export default function NeverHaveIEver() {
 
       <Text className="text-white text-2xl mb-10 text-center">{prompt}</Text>
 
-      <Button title="Next Question" onPress={getQuestion} />
+      <HapticButton
+        title="Next Question"
+        variant="medium"
+        className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
+        onPress={getQuestion}
+      />
     </View>
   );
 }

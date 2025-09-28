@@ -1,6 +1,6 @@
-// app/menu.tsx
+import HapticButton from "@/components/HapticButton";
 import { useRouter } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 
 export default function Menu() {
   const router = useRouter();
@@ -10,47 +10,40 @@ export default function Menu() {
       <Text className="text-4xl font-bold text-white mb-2">🍻 Buzzed</Text>
       <Text className="text-lg text-white/70 mb-10">Choose your game mode</Text>
 
-      <TouchableOpacity
-        onPress={() => router.push("/playerSetup?next=truthOrConsequence")}
+      <HapticButton
+        title="Truth or Consequence"
+        variant="medium"
         className="bg-red-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
-      >
-        <Text className="text-white text-lg font-bold">
-          Truth or Consequence
-        </Text>
-      </TouchableOpacity>
+        onPress={() => router.push("/playerSetup?next=truthOrConsequence")}
+      />
 
-      <TouchableOpacity
-        onPress={() => router.push("/neverHaveIEver")}
+      <HapticButton
+        title="Never Have I Ever 🍹"
+        variant="medium"
         className="bg-orange-500 px-8 py-4 rounded-lg mb-4 w-full items-center"
-      >
-        <Text className="text-white text-lg font-bold">
-          Never Have I Ever 🍹
-        </Text>
-      </TouchableOpacity>
+        onPress={() => router.push("/neverHaveIEver")}
+      />
 
-      <TouchableOpacity
-        onPress={() => router.push("/wouldYouRather")}
+      <HapticButton
+        title="Would You Rather 🤔"
+        variant="medium"
         className="bg-purple-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
-      >
-        <Text className="text-white text-lg font-bold">
-          Would You Rather 🤔
-        </Text>
-      </TouchableOpacity>
+        onPress={() => router.push("/wouldYouRather")}
+      />
 
-      <TouchableOpacity
-        onPress={() => router.push("/mostLikelyTo")}
+      <HapticButton
+        title="Most Likely To 👀"
+        variant="medium"
         className="bg-sky-500 px-8 py-4 rounded-lg mb-4 w-full items-center"
-      >
-        <Text className="text-white text-lg font-bold">Most Likely To 👀</Text>
-      </TouchableOpacity>
+        onPress={() => router.push("/mostLikelyTo")}
+      />
 
-      {/* Eight Seconds */}
-      <TouchableOpacity
-        onPress={() => router.push("/playerSetup?next=eightSeconds")}
+      <HapticButton
+        title="8 Seconds ⏱️"
+        variant="medium"
         className="bg-green-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
-      >
-        <Text className="text-white text-lg font-bold">8 Seconds ⏱️</Text>
-      </TouchableOpacity>
+        onPress={() => router.push("/playerSetup?next=eightSeconds")}
+      />
     </View>
   );
 }

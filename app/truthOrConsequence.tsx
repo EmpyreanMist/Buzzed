@@ -1,7 +1,8 @@
+import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import consequencesData from "../assets/data/consequence.json";
 import truthsData from "../assets/data/truths.json";
 import { usePlayers } from "../components/contexts/PlayerContext";
@@ -50,12 +51,9 @@ export default function TruthOrConsequence() {
       <View className="relative w-full h-16">
         <HomeButton />
 
-        <TouchableOpacity
-          disabled
-          className="absolute top-6 right-6 bg-blue-600 px-3 py-1 rounded-full"
-        >
+        <View className="absolute top-6 right-6 bg-blue-600 px-3 py-1 rounded-full">
           <Text className="text-white font-bold">{players.length} Players</Text>
-        </TouchableOpacity>
+        </View>
       </View>
 
       <View className="flex-1 items-center justify-center px-6">
@@ -68,19 +66,19 @@ export default function TruthOrConsequence() {
         <Text className="text-white text-2xl mb-6 text-center">{prompt}</Text>
 
         <View className="flex-row space-x-4">
-          <TouchableOpacity
-            onPress={getTruth}
+          <HapticButton
+            title="Truth"
+            variant="light"
             className="bg-green-500 px-6 py-3 rounded-lg mr-2"
-          >
-            <Text className="text-white font-bold text-lg">Truth</Text>
-          </TouchableOpacity>
+            onPress={getTruth}
+          />
 
-          <TouchableOpacity
-            onPress={getConsequence}
+          <HapticButton
+            title="Consequence"
+            variant="heavy"
             className="bg-red-600 px-6 py-3 rounded-lg ml-2"
-          >
-            <Text className="text-white font-bold text-lg">Consequence</Text>
-          </TouchableOpacity>
+            onPress={getConsequence}
+          />
         </View>
       </View>
     </>

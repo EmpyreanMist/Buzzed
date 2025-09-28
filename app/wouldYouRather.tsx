@@ -1,8 +1,8 @@
-// app/wouldYouRather.tsx
+import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import questions from "../assets/data/wouldYouRather.json";
 
 type Question = {
@@ -43,12 +43,12 @@ export default function WouldYouRather() {
         )}
       </View>
 
-      <TouchableOpacity
-        onPress={getRandomQuestion}
+      <HapticButton
+        title="Next Question"
+        variant="medium"
         className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
-      >
-        <Text className="text-white font-bold text-lg">Next Question</Text>
-      </TouchableOpacity>
+        onPress={getRandomQuestion}
+      />
     </View>
   );
 }

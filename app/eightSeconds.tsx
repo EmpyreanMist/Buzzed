@@ -1,14 +1,12 @@
-// app/eightSeconds.tsx
+import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
+import { Audio } from "expo-av";
 import { useRouter } from "expo-router";
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import allQuestions from "../assets/data/eightSeconds.json";
 import { usePlayers } from "../components/contexts/PlayerContext";
-
-// 🆕 expo-audio
-import { useAudioPlayer } from "expo-audio";
 
 type Question = { text: string };
 
@@ -16,52 +14,71 @@ export default function EightSeconds() {
   const router = useRouter();
   const { players } = usePlayers();
 
-  const [questions, setQuestions] = useState<Question[]>(allQuestions); // kvarvarande frågor
+  const [questions, setQuestions] = useState<Question[]>(allQuestions);
   const [prompt, setPrompt] = useState<Question | null>(null);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
-  // 🎵 Ljud
-  const startPlayer = useAudioPlayer(require("../assets/sounds/start.mp3"));
-  const stopPlayer = useAudioPlayer(require("../assets/sounds/stop.mp3"));
+  // 🔊 Ladda och spela ljud
+  const playSound = async (file: any) => {
+    try {
+      const { sound } = await Audio.Sound.createAsync(file);
+      await sound.playAsync();
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if ("didJustFinish" in status && status.didJustFinish) {
+          sound.unloadAsync();
+        }
+      });
+    } catch (err) {
+      console.error("Error playing sound:", err);
+    }
+  };
 
   // 🔀 Slumpa fråga utan upprepning
-  const getRandomQuestion = async () => {
+  const getRandomQuestion = () => {
+    if (isRunning || isSpeaking) return; // ⛔ blockera spam
+
     if (questions.length === 0) {
       setPrompt({ text: "No more questions! 🎉" });
       return;
     }
 
-    // välj slumpad index
     const rand = Math.floor(Math.random() * questions.length);
     const newQuestion = questions[rand];
-
-    // ta bort frågan från listan
     setQuestions((prev) => prev.filter((_, i) => i !== rand));
-
-    // uppdatera state
     setPrompt(newQuestion);
-    setTimeLeft(8);
-    setIsRunning(true);
 
-    // bestäm vem som är på tur
     const player = players.length > 0 ? players[currentPlayerIndex] : "Someone";
-
-    // nästa tur index
     setCurrentPlayerIndex((prev) => (prev + 1) % (players.length || 1));
 
-    // 🔊 Startljud
-    await startPlayer.play();
+    // 🔊 Stoppa gammal speech innan ny börjar
+    Speech.stop();
+    setIsSpeaking(true);
 
-    // 🗣️ Säg vems tur det är + fråga
-    Speech.speak(`Now it's ${player}'s turn.`, { rate: 0.9 });
-    setTimeout(() => {
-      Speech.speak(newQuestion.text, { rate: 0.9 });
-    }, 1200); // liten delay så ljudet inte överlappar
+    // 🔊 Startljud
+    playSound(require("../assets/sounds/start.mp3"));
+
+    // 🗣️ Säg vems tur det är → fråga → sen starta timer
+    Speech.speak(`Now it's ${player}'s turn.`, {
+      rate: 0.9,
+      language: "en-US",
+      onDone: () => {
+        Speech.speak(newQuestion.text, {
+          rate: 0.9,
+          language: "en-US",
+          onDone: () => {
+            setIsSpeaking(false);
+            setTimeLeft(8);
+            setIsRunning(true);
+          },
+        });
+      },
+    });
   };
 
-  // ⏱️ Timer
+  // ⏱️ Timer med uppläsning på svenska
   useEffect(() => {
     if (!isRunning || timeLeft <= 0) return;
 
@@ -70,12 +87,17 @@ export default function EightSeconds() {
         if (prev <= 1) {
           clearInterval(interval);
           setIsRunning(false);
-
-          // 🔊 Stoppljud
-          stopPlayer.play();
-
+          playSound(require("../assets/sounds/stop.mp3"));
           return 0;
         }
+
+        // 🔊 Läs siffran på svenska
+        Speech.stop(); // stoppa ev. pågående speech först
+        Speech.speak(`${prev - 1}`, {
+          language: "sv-SE",
+          rate: 1.0,
+        });
+
         return prev - 1;
       });
     }, 1000);
@@ -83,8 +105,17 @@ export default function EightSeconds() {
     return () => clearInterval(interval);
   }, [isRunning, timeLeft]);
 
+  // 🛑 Stoppa TTS och timer om man lämnar sidan
+  useEffect(() => {
+    return () => {
+      Speech.stop();
+      setIsRunning(false);
+      setIsSpeaking(false);
+    };
+  }, []);
+
   return (
-    <SafeAreaView className="flex-1 bg-black">
+    <>
       {/* Header */}
       <View className="relative w-full h-16">
         <HomeButton />
@@ -112,17 +143,15 @@ export default function EightSeconds() {
       </View>
 
       {/* Start-knapp */}
-      <TouchableOpacity
-        onPress={getRandomQuestion}
-        disabled={isRunning}
+      <HapticButton
+        title={isRunning || isSpeaking ? "Running..." : "Start Round"}
+        variant="medium"
+        disabled={isRunning || isSpeaking}
         className={`px-8 py-4 rounded-lg self-center mb-16 ${
-          isRunning ? "bg-gray-600" : "bg-green-600"
+          isRunning || isSpeaking ? "bg-gray-600" : "bg-green-600"
         }`}
-      >
-        <Text className="text-white font-bold text-lg">
-          {isRunning ? "Running..." : "Start Round"}
-        </Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+        onPress={getRandomQuestion}
+      />
+    </>
   );
 }

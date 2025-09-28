@@ -1,6 +1,7 @@
+import HapticButton from "@/components/HapticButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import questions from "../assets/data/mostLikelyTo.json";
 import HomeButton from "../components/HomeButton";
 
@@ -18,29 +19,27 @@ export default function MostLikelyTo() {
   };
 
   return (
-    <>
-      <View className="flex-1 bg-black px-6 pt-16">
-        <HomeButton />
+    <View className="flex-1 bg-black px-6 pt-16">
+      <HomeButton />
 
-        <View className="flex-1 items-center justify-center">
-          {prompt ? (
-            <Text className="text-white text-2xl text-center px-4">
-              {prompt.text}
-            </Text>
-          ) : (
-            <Text className="text-white text-xl text-center px-4 opacity-70">
-              Tap below to get a question 👇
-            </Text>
-          )}
-        </View>
-
-        <TouchableOpacity
-          onPress={getRandomQuestion}
-          className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
-        >
-          <Text className="text-white font-bold text-lg">Next Question</Text>
-        </TouchableOpacity>
+      <View className="flex-1 items-center justify-center">
+        {prompt ? (
+          <Text className="text-white text-2xl text-center px-4">
+            {prompt.text}
+          </Text>
+        ) : (
+          <Text className="text-white text-xl text-center px-4 opacity-70">
+            Tap below to get a question 👇
+          </Text>
+        )}
       </View>
-    </>
+
+      <HapticButton
+        title="Next Question"
+        variant="medium"
+        className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
+        onPress={getRandomQuestion}
+      />
+    </View>
   );
 }
