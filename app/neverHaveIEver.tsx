@@ -1,5 +1,6 @@
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
+import SettingsButton from "@/components/SettingsButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
@@ -21,8 +22,14 @@ export default function NeverHaveIEver() {
   };
 
   return (
-    <View className="flex-1 items-center justify-center bg-black px-6">
-      <HomeButton />
+    <View className="flex-1 bg-black px-6">
+      {/* Header */}
+      <View className="relative w-full h-16 mb-6">
+        <HomeButton />
+        <View className="absolute bottom-12 left-6">
+          <SettingsButton />
+        </View>
+      </View>
 
       <Text className="text-white text-4xl font-bold mb-12 text-center">
         Never Have I Ever...

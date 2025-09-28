@@ -1,4 +1,5 @@
 import HapticButton from "@/components/HapticButton";
+import SettingsButton from "@/components/SettingsButton";
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 
@@ -6,9 +7,13 @@ export default function Menu() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 items-center justify-center bg-black px-6">
-      <Text className="text-4xl font-bold text-white mb-2">🍻 Buzzed</Text>
-      <Text className="text-lg text-white/70 mb-10">Choose your game mode</Text>
+    <View className="flex-1 bg-black px-6">
+      <Text className="text-4xl font-bold text-white mb-2 text-center mt-4">
+        🍻 Buzzed
+      </Text>
+      <Text className="text-lg text-white/70 mb-10 text-center">
+        Choose your game mode
+      </Text>
 
       <HapticButton
         title="Truth or Consequence"
@@ -44,6 +49,11 @@ export default function Menu() {
         className="bg-green-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
         onPress={() => router.push("/playerSetup?next=eightSeconds")}
       />
+
+      {/* Kugghjulet nere till vänster, lite högre upp */}
+      <View className="absolute bottom-12 left-6">
+        <SettingsButton />
+      </View>
     </View>
   );
 }

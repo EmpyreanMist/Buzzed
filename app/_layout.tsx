@@ -7,6 +7,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+import { SettingsProvider } from "@/components/contexts/SettingsContext";
 import ScreenContainer from "@/components/ScreenContainer";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
@@ -18,30 +19,34 @@ export default function RootLayout() {
 
   return (
     <PlayerProvider>
-      <GluestackUIProvider mode="dark">
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <ScreenContainer>
-            <Stack screenOptions={{ headerShown: false }}>
-              {/* Age Gate */}
-              <Stack.Screen name="index" />
-              {/* Player setup */}
-              <Stack.Screen name="playerSetup" />
-              {/* Menu */}
-              <Stack.Screen name="menu" />
-              {/* Games */}
-              <Stack.Screen name="truthOrConsequence" />
-              <Stack.Screen name="neverHaveIEver" />
-              <Stack.Screen name="wouldYouRather" />
-              <Stack.Screen name="mostLikelyTo" />
-              <Stack.Screen name="eightSeconds" />
-            </Stack>
+      <SettingsProvider>
+        <GluestackUIProvider mode="dark">
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <ScreenContainer>
+              <Stack screenOptions={{ headerShown: false }}>
+                {/* Age Gate */}
+                <Stack.Screen name="index" />
+                {/* Player setup */}
+                <Stack.Screen name="playerSetup" />
+                {/* Menu */}
+                <Stack.Screen name="menu" />
+                {/* Games */}
+                <Stack.Screen name="truthOrConsequence" />
+                <Stack.Screen name="neverHaveIEver" />
+                <Stack.Screen name="wouldYouRather" />
+                <Stack.Screen name="mostLikelyTo" />
+                <Stack.Screen name="eightSeconds" />
+                {/* Settings */}
+                <Stack.Screen name="settings" />
+              </Stack>
 
-            <StatusBar style="auto" />
-          </ScreenContainer>
-        </ThemeProvider>
-      </GluestackUIProvider>
+              <StatusBar style="auto" />
+            </ScreenContainer>
+          </ThemeProvider>
+        </GluestackUIProvider>
+      </SettingsProvider>
     </PlayerProvider>
   );
 }

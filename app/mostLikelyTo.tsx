@@ -1,21 +1,28 @@
+import { useSettings } from "@/components/contexts/SettingsContext";
 import HapticButton from "@/components/HapticButton";
 import { useRouter } from "expo-router";
+import * as Speech from "expo-speech";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import questions from "../assets/data/mostLikelyTo.json";
 import HomeButton from "../components/HomeButton";
 
-type Question = {
-  text: string;
-};
+type Question = { text: string };
 
 export default function MostLikelyTo() {
   const router = useRouter();
   const [prompt, setPrompt] = useState<Question | null>(null);
+  const { ttsEnabled, language } = useSettings();
 
   const getRandomQuestion = () => {
     const rand = Math.floor(Math.random() * questions.length);
-    setPrompt(questions[rand]);
+    const q = questions[rand];
+    setPrompt(q);
+
+    if (ttsEnabled) {
+      Speech.stop();
+      Speech.speak(q.text, { language, rate: 0.9 });
+    }
   };
 
   return (

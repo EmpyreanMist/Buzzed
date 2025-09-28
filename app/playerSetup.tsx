@@ -1,4 +1,5 @@
 import HapticButton from "@/components/HapticButton";
+import SettingsButton from "@/components/SettingsButton";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
@@ -34,6 +35,13 @@ export default function PlayerSetup() {
 
   return (
     <View className="flex-1 bg-black px-6 pt-12">
+      {/* Header */}
+      <View className="relative w-full h-16 mb-6">
+        <View className="absolute bottom-12 left-6">
+          <SettingsButton />
+        </View>
+      </View>
+
       <Text className="text-white text-4xl font-bold text-center mb-6">
         Add Players
       </Text>
@@ -69,8 +77,8 @@ export default function PlayerSetup() {
 
             <HapticButton
               title="✖"
-              variant="error"
-              className="px-2 py-1"
+              variant="medium"
+              className="bg-red-600 px-2 py-1 rounded"
               onPress={() => handleRemovePlayer(index)}
             />
           </View>

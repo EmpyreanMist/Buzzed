@@ -1,5 +1,6 @@
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
+import SettingsButton from "@/components/SettingsButton";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, View } from "react-native";
@@ -20,9 +21,16 @@ export default function WouldYouRather() {
   };
 
   return (
-    <View className="flex-1 bg-black px-6 pt-16">
-      <HomeButton />
+    <View className="flex-1 bg-black px-6">
+      {/* Header */}
+      <View className="relative w-full h-16 mb-6">
+        <HomeButton />
+        <View className="absolute bottom-12 left-6">
+          <SettingsButton />
+        </View>
+      </View>
 
+      {/* Main */}
       <View className="flex-1 items-center justify-center">
         {prompt ? (
           <>
@@ -43,6 +51,7 @@ export default function WouldYouRather() {
         )}
       </View>
 
+      {/* Button */}
       <HapticButton
         title="Next Question"
         variant="medium"

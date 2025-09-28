@@ -1,6 +1,8 @@
+import { useSettings } from "@/components/contexts/SettingsContext";
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
-import { Audio } from "expo-av";
+import SettingsButton from "@/components/SettingsButton";
+import { useAudioPlayer } from "expo-audio";
 import { useRouter } from "expo-router";
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
@@ -13,6 +15,7 @@ type Question = { text: string };
 export default function EightSeconds() {
   const router = useRouter();
   const { players } = usePlayers();
+  const { ttsEnabled, language } = useSettings();
 
   const [questions, setQuestions] = useState<Question[]>(allQuestions);
   const [prompt, setPrompt] = useState<Question | null>(null);
@@ -21,20 +24,9 @@ export default function EightSeconds() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
 
-  // 🔊 Ladda och spela ljud
-  const playSound = async (file: any) => {
-    try {
-      const { sound } = await Audio.Sound.createAsync(file);
-      await sound.playAsync();
-      sound.setOnPlaybackStatusUpdate((status) => {
-        if ("didJustFinish" in status && status.didJustFinish) {
-          sound.unloadAsync();
-        }
-      });
-    } catch (err) {
-      console.error("Error playing sound:", err);
-    }
-  };
+  // 🎵 Ljud med expo-audio
+  const startSound = useAudioPlayer(require("../assets/sounds/start.mp3"));
+  const stopSound = useAudioPlayer(require("../assets/sounds/stop.mp3"));
 
   // 🔀 Slumpa fråga utan upprepning
   const getRandomQuestion = () => {
@@ -53,32 +45,39 @@ export default function EightSeconds() {
     const player = players.length > 0 ? players[currentPlayerIndex] : "Someone";
     setCurrentPlayerIndex((prev) => (prev + 1) % (players.length || 1));
 
-    // 🔊 Stoppa gammal speech innan ny börjar
+    // 🛑 stoppa gammal speech
     Speech.stop();
     setIsSpeaking(true);
 
     // 🔊 Startljud
-    playSound(require("../assets/sounds/start.mp3"));
+    startSound.play();
 
-    // 🗣️ Säg vems tur det är → fråga → sen starta timer
-    Speech.speak(`Now it's ${player}'s turn.`, {
-      rate: 0.9,
-      language: "en-US",
-      onDone: () => {
-        Speech.speak(newQuestion.text, {
-          rate: 0.9,
-          language: "en-US",
-          onDone: () => {
-            setIsSpeaking(false);
-            setTimeLeft(8);
-            setIsRunning(true);
-          },
-        });
-      },
-    });
+    // 🗣️ TTS om aktiverat
+    if (ttsEnabled) {
+      Speech.speak(`Now it's ${player}'s turn.`, {
+        rate: 0.9,
+        language,
+        onDone: () => {
+          Speech.speak(newQuestion.text, {
+            rate: 0.9,
+            language,
+            onDone: () => {
+              setIsSpeaking(false);
+              setTimeLeft(8);
+              setIsRunning(true);
+            },
+          });
+        },
+      });
+    } else {
+      // Ingen TTS → starta timer direkt
+      setIsSpeaking(false);
+      setTimeLeft(8);
+      setIsRunning(true);
+    }
   };
 
-  // ⏱️ Timer med uppläsning på svenska
+  // ⏱️ Timer
   useEffect(() => {
     if (!isRunning || timeLeft <= 0) return;
 
@@ -87,25 +86,27 @@ export default function EightSeconds() {
         if (prev <= 1) {
           clearInterval(interval);
           setIsRunning(false);
-          playSound(require("../assets/sounds/stop.mp3"));
+          stopSound.play();
           return 0;
         }
 
-        // 🔊 Läs siffran på svenska
-        Speech.stop(); // stoppa ev. pågående speech först
-        Speech.speak(`${prev - 1}`, {
-          language: "sv-SE",
-          rate: 1.0,
-        });
+        // 🔊 Läs siffran om TTS är på
+        if (ttsEnabled) {
+          Speech.stop();
+          Speech.speak(`${prev - 1}`, {
+            language,
+            rate: 1.0,
+          });
+        }
 
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isRunning, timeLeft]);
+  }, [isRunning, timeLeft, ttsEnabled, language]);
 
-  // 🛑 Stoppa TTS och timer om man lämnar sidan
+  // 🛑 Stoppa TTS när man lämnar sidan
   useEffect(() => {
     return () => {
       Speech.stop();
@@ -115,7 +116,7 @@ export default function EightSeconds() {
   }, []);
 
   return (
-    <>
+    <View className="flex-1 bg-black">
       {/* Header */}
       <View className="relative w-full h-16">
         <HomeButton />
@@ -152,6 +153,11 @@ export default function EightSeconds() {
         }`}
         onPress={getRandomQuestion}
       />
-    </>
+
+      {/* Kugghjulet nere till vänster */}
+      <View className="absolute bottom-12 left-6">
+        <SettingsButton />
+      </View>
+    </View>
   );
 }
