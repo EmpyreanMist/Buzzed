@@ -1,3 +1,4 @@
+import { useQuestions } from "@/assets/data/questionLoader"; // 👈 ny import
 import { useSettings } from "@/components/contexts/SettingsContext";
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
@@ -6,29 +7,26 @@ import { useRouter } from "expo-router";
 import * as Speech from "expo-speech";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import questionsData from "../assets/data/neverHaveIEver.json";
 
 type Question = {
   text: string;
 };
 
-const questions: Question[] = questionsData;
-
 export default function NeverHaveIEver() {
   const router = useRouter();
   const [prompt, setPrompt] = useState("");
   const { ttsEnabled, language } = useSettings();
+  const { neverHaveIEver } = useQuestions(); // 👈 hämtar rätt språkversion
 
   const getQuestion = () => {
-    const rand = Math.floor(Math.random() * questions.length);
-    const newPrompt = questions[rand].text;
+    const rand = Math.floor(Math.random() * neverHaveIEver.length);
+    const newPrompt = neverHaveIEver[rand].text;
     setPrompt(newPrompt);
 
     // 🔊 Läs upp frågan om TTS är aktiverat
     if (ttsEnabled) {
-      Speech.speak(newPrompt, {
-        language, // direkt från context (t.ex. "sv-SE" eller "en-US")
-      });
+      Speech.stop();
+      Speech.speak(newPrompt, { language });
     }
   };
 
@@ -40,13 +38,13 @@ export default function NeverHaveIEver() {
       {/* Centrera hela innehållet */}
       <View className="flex-1 justify-center items-center">
         <Text className="text-white text-4xl font-bold mb-12 text-center">
-          Never Have I Ever...
+          {language === "sv-SE" ? "Jag har aldrig..." : "Never Have I Ever..."}
         </Text>
 
         <Text className="text-white text-2xl mb-10 text-center">{prompt}</Text>
 
         <HapticButton
-          title="Next Question"
+          title={language === "sv-SE" ? "Nästa fråga" : "Next Question"}
           variant="medium"
           className="bg-green-600 px-8 py-4 rounded-lg"
           onPress={getQuestion}

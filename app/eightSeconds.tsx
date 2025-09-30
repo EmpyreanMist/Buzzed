@@ -1,157 +1,103 @@
-import { useSettings } from "@/components/contexts/SettingsContext";
+import { useQuestions } from "@/assets/data/questionLoader";
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
 import SettingsButton from "@/components/SettingsButton";
-import { useAudioPlayer } from "expo-audio";
-import { useRouter } from "expo-router";
+import { useSettings } from "@/components/contexts/SettingsContext";
+import { Audio } from "expo-av"; // 👈 för ljud
 import * as Speech from "expo-speech";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import allQuestions from "../assets/data/eightSeconds.json";
 import { usePlayers } from "../components/contexts/PlayerContext";
 
 type Question = { text: string };
 
 export default function EightSeconds() {
-  const router = useRouter();
   const { players } = usePlayers();
-  const { ttsEnabled, language } = useSettings();
-
-  const [questions, setQuestions] = useState<Question[]>(allQuestions);
   const [prompt, setPrompt] = useState<Question | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
-  const [isRunning, setIsRunning] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const { ttsEnabled, language } = useSettings();
+  const { eightSeconds } = useQuestions();
 
-  // 🎵 Ljud med expo-audio
-  const startSound = useAudioPlayer(require("../assets/sounds/start.mp3"));
-  const stopSound = useAudioPlayer(require("../assets/sounds/stop.mp3"));
+  const [timer, setTimer] = useState<number | null>(null);
+  const [isLocked, setIsLocked] = useState(false); // 👈 blockerar nästa fråga
 
-  // 🔀 Slumpa fråga utan upprepning
-  const getRandomQuestion = () => {
-    if (isRunning || isSpeaking) return; // ⛔ blockera spam
+  // spela upp ljud
+  const playSound = async (file: any) => {
+    const { sound } = await Audio.Sound.createAsync(file);
+    await sound.playAsync();
+  };
 
-    if (questions.length === 0) {
-      setPrompt({ text: "No more questions! 🎉" });
-      return;
-    }
+  const getQuestion = () => {
+    // blockera ny fråga tills timern är slut
+    setIsLocked(true);
 
-    const rand = Math.floor(Math.random() * questions.length);
-    const newQuestion = questions[rand];
-    setQuestions((prev) => prev.filter((_, i) => i !== rand));
-    setPrompt(newQuestion);
+    const rand = Math.floor(Math.random() * eightSeconds.length);
+    const newPrompt = eightSeconds[rand];
+    setPrompt(newPrompt);
 
-    const player = players.length > 0 ? players[currentPlayerIndex] : "Someone";
-    setCurrentPlayerIndex((prev) => (prev + 1) % (players.length || 1));
-
-    // 🛑 stoppa gammal speech
-    Speech.stop();
-    setIsSpeaking(true);
-
-    // 🔊 Startljud
-    startSound.play();
-
-    // 🗣️ TTS om aktiverat
+    // Läs upp frågan
     if (ttsEnabled) {
-      Speech.speak(`Now it's ${player}'s turn.`, {
-        rate: 0.9,
+      Speech.stop();
+      Speech.speak(newPrompt.text, {
         language,
         onDone: () => {
-          Speech.speak(newQuestion.text, {
-            rate: 0.9,
-            language,
-            onDone: () => {
-              setIsSpeaking(false);
-              setTimeLeft(8);
-              setIsRunning(true);
-            },
-          });
+          // starta timer när TTS är färdigt
+          setTimer(8);
+          playSound(require("../assets/sounds/start.mp3"));
         },
       });
     } else {
-      // Ingen TTS → starta timer direkt
-      setIsSpeaking(false);
-      setTimeLeft(8);
-      setIsRunning(true);
+      // Om TTS inte är på → starta direkt
+      setTimer(8);
+      playSound(require("../assets/sounds/start.mp3"));
     }
   };
 
-  // ⏱️ Timer
+  // countdown
   useEffect(() => {
-    if (!isRunning || timeLeft <= 0) return;
+    if (timer === null) return;
 
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          setIsRunning(false);
-          stopSound.play();
-          return 0;
-        }
-
-        // 🔊 Läs siffran om TTS är på
-        if (ttsEnabled) {
-          Speech.stop();
-          Speech.speak(`${prev - 1}`, {
-            language,
-            rate: 1.0,
-          });
-        }
-
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [isRunning, timeLeft, ttsEnabled, language]);
-
-  // 🛑 Stoppa TTS när man lämnar sidan
-  useEffect(() => {
-    return () => {
+    if (timer > 0) {
+      const id = setTimeout(() => setTimer(timer - 1), 1000);
+      return () => clearTimeout(id);
+    } else if (timer === 0) {
+      // när timern tar slut
+      playSound(require("../assets/sounds/stop.mp3"));
       Speech.stop();
-      setIsRunning(false);
-      setIsSpeaking(false);
-    };
-  }, []);
+      setIsLocked(false); // 👈 nu kan man gå vidare
+    }
+  }, [timer]);
 
   return (
-    <View className="flex-1 bg-black">
-      {/* Header */}
-      <View className="relative w-full h-16">
-        <HomeButton />
-        <View className="absolute top-6 right-6 bg-blue-600 px-3 py-1 rounded-full">
-          <Text className="text-white font-bold">{players.length} Players</Text>
-        </View>
-      </View>
+    <View className="flex-1 bg-black px-6">
+      <HomeButton />
 
-      {/* Main */}
-      <View className="flex-1 items-center justify-center px-6">
+      <View className="flex-1 items-center justify-center">
         {prompt ? (
           <>
             <Text className="text-white text-2xl text-center mb-6">
-              ⏱️ {timeLeft > 0 ? `${timeLeft}s left` : "Time’s up!"}
-            </Text>
-            <Text className="text-white text-xl text-center">
               {prompt.text}
             </Text>
+            {timer !== null && (
+              <Text className="text-green-400 text-4xl font-bold">{timer}</Text>
+            )}
           </>
         ) : (
-          <Text className="text-white text-xl text-center opacity-70">
-            Tap below to start a round 👇
+          <Text className="text-white text-xl text-center px-4 opacity-70">
+            {language === "sv-SE"
+              ? "Tryck nedan för att få din första fråga"
+              : "Tap below to get your first question"}
           </Text>
         )}
       </View>
 
-      {/* Start-knapp */}
       <HapticButton
-        title={isRunning || isSpeaking ? "Running..." : "Start Round"}
+        title={language === "sv-SE" ? "Nästa fråga" : "Next Question"}
         variant="medium"
-        disabled={isRunning || isSpeaking}
+        disabled={isLocked} // 👈 låst under timer
         className={`px-8 py-4 rounded-lg self-center mb-16 ${
-          isRunning || isSpeaking ? "bg-gray-600" : "bg-green-600"
+          isLocked ? "bg-gray-600" : "bg-green-600"
         }`}
-        onPress={getRandomQuestion}
+        onPress={getQuestion}
       />
 
       <View className="absolute bottom-20 left-6">

@@ -1,3 +1,4 @@
+import { useQuestions } from "@/assets/data/questionLoader"; // 👈 ny helper
 import { useSettings } from "@/components/contexts/SettingsContext";
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
@@ -6,7 +7,6 @@ import { useRouter } from "expo-router";
 import * as Speech from "expo-speech";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import questions from "../assets/data/wouldYouRather.json";
 
 type Question = {
   optionA: string;
@@ -17,19 +17,28 @@ export default function WouldYouRather() {
   const router = useRouter();
   const [prompt, setPrompt] = useState<Question | null>(null);
   const { ttsEnabled, language } = useSettings();
+  const { wouldYouRather } = useQuestions(); // 👈 hämtar rätt språkversion
 
   const getRandomQuestion = () => {
-    const rand = Math.floor(Math.random() * questions.length);
-    const newPrompt = questions[rand];
+    const rand = Math.floor(Math.random() * wouldYouRather.length);
+    const newPrompt = wouldYouRather[rand];
     setPrompt(newPrompt);
 
     // 🔊 Läs upp frågan om TTS är aktiverat
     if (ttsEnabled) {
       Speech.stop(); // stoppa ev. tidigare uppläsning
-      Speech.speak("Would you rather...", { language });
-      Speech.speak(newPrompt.optionA, { language });
-      Speech.speak("or", { language });
-      Speech.speak(newPrompt.optionB, { language });
+
+      if (language === "sv-SE") {
+        Speech.speak("Skulle du hellre...", { language });
+        Speech.speak(newPrompt.optionA, { language });
+        Speech.speak("eller", { language });
+        Speech.speak(newPrompt.optionB, { language });
+      } else {
+        Speech.speak("Would you rather...", { language });
+        Speech.speak(newPrompt.optionA, { language });
+        Speech.speak("or", { language });
+        Speech.speak(newPrompt.optionB, { language });
+      }
     }
   };
 
@@ -45,7 +54,9 @@ export default function WouldYouRather() {
         {prompt ? (
           <>
             <Text className="text-white text-2xl text-center mb-6">
-              Would you rather...
+              {language === "sv-SE"
+                ? "Skulle du hellre..."
+                : "Would you rather..."}
             </Text>
             <Text className="text-white text-xl text-center mb-4">
               {prompt.optionA}
@@ -56,14 +67,16 @@ export default function WouldYouRather() {
           </>
         ) : (
           <Text className="text-white text-xl text-center px-4 opacity-70">
-            Tap below to get your first question
+            {language === "sv-SE"
+              ? "Tryck nedan för att få din första fråga"
+              : "Tap below to get your first question"}
           </Text>
         )}
       </View>
 
       {/* Button */}
       <HapticButton
-        title="Next Question"
+        title={language === "sv-SE" ? "Nästa fråga" : "Next Question"}
         variant="medium"
         className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
         onPress={getRandomQuestion}
