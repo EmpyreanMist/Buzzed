@@ -35,13 +35,6 @@ export default function PlayerSetup() {
 
   return (
     <View className="flex-1 bg-black px-6 pt-12">
-      {/* Header */}
-      <View className="relative w-full h-16 mb-6">
-        <View className="absolute bottom-12 left-6">
-          <SettingsButton />
-        </View>
-      </View>
-
       <Text className="text-white text-4xl font-bold text-center mb-6">
         Add Players
       </Text>
@@ -94,6 +87,9 @@ export default function PlayerSetup() {
           onPress={startGame}
         />
       )}
+      <View className="absolute bottom-20 left-6">
+        <SettingsButton />
+      </View>
     </View>
   );
 }

@@ -49,9 +49,7 @@ export default function Menu() {
         className="bg-green-600 px-8 py-4 rounded-lg mb-4 w-full items-center"
         onPress={() => router.push("/playerSetup?next=eightSeconds")}
       />
-
-      {/* Kugghjulet nere till vänster, lite högre upp */}
-      <View className="absolute bottom-12 left-6">
+      <View className="absolute bottom-20 left-6">
         <SettingsButton />
       </View>
     </View>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import questions from "../assets/data/mostLikelyTo.json";
 import HomeButton from "../components/HomeButton";
+import SettingsButton from "../components/SettingsButton";
 
 type Question = { text: string };
 
@@ -47,6 +48,9 @@ export default function MostLikelyTo() {
         className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
         onPress={getRandomQuestion}
       />
+      <View className="absolute bottom-20 left-6">
+        <SettingsButton />
+      </View>
     </View>
   );
 }

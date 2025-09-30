@@ -1,7 +1,9 @@
+import { useSettings } from "@/components/contexts/SettingsContext";
 import HapticButton from "@/components/HapticButton";
 import HomeButton from "@/components/HomeButton";
 import SettingsButton from "@/components/SettingsButton";
 import { useRouter } from "expo-router";
+import * as Speech from "expo-speech";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import questions from "../assets/data/wouldYouRather.json";
@@ -14,10 +16,21 @@ type Question = {
 export default function WouldYouRather() {
   const router = useRouter();
   const [prompt, setPrompt] = useState<Question | null>(null);
+  const { ttsEnabled, language } = useSettings();
 
   const getRandomQuestion = () => {
     const rand = Math.floor(Math.random() * questions.length);
-    setPrompt(questions[rand]);
+    const newPrompt = questions[rand];
+    setPrompt(newPrompt);
+
+    // 🔊 Läs upp frågan om TTS är aktiverat
+    if (ttsEnabled) {
+      Speech.stop(); // stoppa ev. tidigare uppläsning
+      Speech.speak("Would you rather...", { language });
+      Speech.speak(newPrompt.optionA, { language });
+      Speech.speak("or", { language });
+      Speech.speak(newPrompt.optionB, { language });
+    }
   };
 
   return (
@@ -25,9 +38,6 @@ export default function WouldYouRather() {
       {/* Header */}
       <View className="relative w-full h-16 mb-6">
         <HomeButton />
-        <View className="absolute bottom-12 left-6">
-          <SettingsButton />
-        </View>
       </View>
 
       {/* Main */}
@@ -58,6 +68,11 @@ export default function WouldYouRather() {
         className="bg-green-600 px-8 py-4 rounded-lg self-center mb-16"
         onPress={getRandomQuestion}
       />
+
+      {/* Settings-knapp */}
+      <View className="absolute bottom-20 left-6">
+        <SettingsButton />
+      </View>
     </View>
   );
 }

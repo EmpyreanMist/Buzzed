@@ -154,8 +154,7 @@ export default function EightSeconds() {
         onPress={getRandomQuestion}
       />
 
-      {/* Kugghjulet nere till vänster */}
-      <View className="absolute bottom-12 left-6">
+      <View className="absolute bottom-20 left-6">
         <SettingsButton />
       </View>
     </View>
