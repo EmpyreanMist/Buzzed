@@ -1,0 +1,111 @@
+[
+  {
+    "optionA": "Aldrig dricka alkohol igen",
+    "optionB": "Aldrig äta pizza igen"
+  },
+  {
+    "optionA": "Vara rik men ensam",
+    "optionB": "Vara fattig men omgiven av vänner"
+  },
+  {
+    "optionA": "Alltid säga vad du tänker",
+    "optionB": "Aldrig kunna prata igen"
+  },
+  {
+    "optionA": "Bara lyssna på en låt för alltid",
+    "optionB": "Aldrig lyssna på musik igen"
+  },
+  {
+    "optionA": "Alltid komma 10 minuter för sent",
+    "optionB": "Alltid komma 20 minuter för tidigt"
+  },
+  { "optionA": "Förlora din telefon", "optionB": "Förlora din plånbok" },
+  { "optionA": "Leva utan kaffe", "optionB": "Leva utan öl" },
+  { "optionA": "Alltid ha hicka", "optionB": "Alltid känna att du måste nysa" },
+  {
+    "optionA": "Tillbringa ett år i fängelse",
+    "optionB": "Tillbringa ett år helt ensam"
+  },
+  {
+    "optionA": "Ha obegränsat gratis mat",
+    "optionB": "Ha obegränsat gratis dryck"
+  },
+
+  { "optionA": "Kunna flyga", "optionB": "Vara osynlig" },
+  {
+    "optionA": "Aldrig använda sociala medier igen",
+    "optionB": "Aldrig se TV/filmer igen"
+  },
+  { "optionA": "Alltid ha dålig andedräkt", "optionB": "Alltid lukta svett" },
+  { "optionA": "Leva i det förflutna", "optionB": "Leva i framtiden" },
+  {
+    "optionA": "Vara den roligaste i rummet",
+    "optionB": "Vara den smartaste i rummet"
+  },
+  { "optionA": "Aldrig duscha igen", "optionB": "Aldrig borsta tänderna igen" },
+  {
+    "optionA": "Ha inget internet",
+    "optionB": "Ha ingen värme eller luftkonditionering"
+  },
+  { "optionA": "Bara viska för alltid", "optionB": "Bara skrika för alltid" },
+  {
+    "optionA": "Fastna i trafik för alltid",
+    "optionB": "Ha jättelångsamt internet för alltid"
+  },
+  { "optionA": "Veta datumet du ska dö", "optionB": "Veta hur du ska dö" },
+
+  { "optionA": "Kunna läsa tankar", "optionB": "Kunna teleportera dig" },
+  { "optionA": "Ha superstyrka", "optionB": "Ha superintelligens" },
+  { "optionA": "Vara känd men hatad", "optionB": "Vara okänd men älskad" },
+  {
+    "optionA": "Aldrig kunna ljuga igen",
+    "optionB": "Alltid tro på allt du blir tillsagd"
+  },
+  { "optionA": "Bara äta söta saker", "optionB": "Bara äta salta saker" },
+  {
+    "optionA": "Slåss mot en anka stor som en häst",
+    "optionB": "Slåss mot 100 hästar stora som ankor"
+  },
+  { "optionA": "Vara barn hela livet", "optionB": "Vara vuxen hela livet" },
+  {
+    "optionA": "Ha en spola-tillbaka-knapp i livet",
+    "optionB": "Ha en pausknapp i livet"
+  },
+  { "optionA": "Alltid vara för varm", "optionB": "Alltid vara för kall" },
+  {
+    "optionA": "Aldrig sova igen",
+    "optionB": "Aldrig äta din favoritmat igen"
+  },
+
+  {
+    "optionA": "Vinna på lotto men förlora alla dina vänner",
+    "optionB": "Vara pank men ha fantastiska vänner"
+  },
+  {
+    "optionA": "Alltid fastna vid rött ljus",
+    "optionB": "Alltid ha långsamt Wi-Fi"
+  },
+  { "optionA": "Leva utan musik", "optionB": "Leva utan filmer" },
+  {
+    "optionA": "Bara kunna använda en gaffel",
+    "optionB": "Bara kunna använda en sked"
+  },
+  {
+    "optionA": "Alltid ha blöta strumpor",
+    "optionB": "Alltid ha fuktiga underkläder"
+  },
+  { "optionA": "Kunna prata med djur", "optionB": "Kunna tala alla språk" },
+  {
+    "optionA": "Ha obegränsat gratis resor",
+    "optionB": "Ha obegränsat gratis kläder"
+  },
+  { "optionA": "Alltid vara hungrig", "optionB": "Alltid vara trött" },
+  {
+    "optionA": "Förlora alla dina pengar",
+    "optionB": "Förlora alla dina foton"
+  },
+  {
+    "optionA": "Fastna på en öde ö ensam",
+    "optionB": "Fastna på en öde ö med din värsta fiende"
+  }
+]
