@@ -1,50 +1,45 @@
-# Welcome to your Expo app 👋
+# Party Games App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile party game app built with [Expo](https://expo.dev) and React Native.  
+It includes multiple classic party games with **Text-to-Speech (TTS)** support and **multilingual support (English/Swedish)**.
 
-## Get started
+## Screenshots
 
-1. Install dependencies
+![Age restriction](image.png)
+![Main menu](image-1.png)
+![Player setup](image-2.png)
+![Truth or Consequence](image-3.png)
+![Truth](image-4.png)
+![Settings Menu](image-5.png)
+![Never have I ever](image-6.png)
+![Would you rather](image-7.png)
+![Most likely to](image-8.png)
+![8 seconds](image-9.png)
 
+## 🕹️ Games Included
+
+- **Never Have I Ever**
+- **Would You Rather**
+- **Most Likely To**
+- **Truth or Consequence**
+- **8 Seconds Challenge**
+
+## Features
+
+- **Text-to-Speech (TTS)** in both English and Swedish
+- **Multilingual support** – switch language directly in the app
+- **Sound effects** (start/stop in 8 Seconds Challenge)
+- Works on both iOS and Android
+- Smooth animations and haptic feedback
+
+## Getting Started
+
+1. Install dependencies:
    ```bash
    npm install
    ```
-
 2. Start the app
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
 ```bash
-npm run reset-project
+npx expo start
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
